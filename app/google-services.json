@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "488765053429",
+    "firebase_url": "https://phoneauth-3464f.firebaseio.com",
+    "project_id": "phoneauth-3464f",
+    "storage_bucket": "phoneauth-3464f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488765053429:android:5c07a6cdec21fb6c",
+        "android_client_info": {
+          "package_name": "com.mukhayy.retrofit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488765053429-ci2ecb5kcfl5qj2meuihvu6lduq3igr2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mukhayy.retrofit",
+            "certificate_hash": "2008aee5a6701ae373d6205b72bac27e938f0b82"
+          }
+        },
+        {
+          "client_id": "488765053429-0bsno4o1n65glifd1u6p4ck4mm1ses8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR9ZnoODCJ3PFyPFn1-l-MwOKvFEOokT4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488765053429-0bsno4o1n65glifd1u6p4ck4mm1ses8i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

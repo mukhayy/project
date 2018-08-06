@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">RETROFIT</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="more">More</string>
+    <string name="map">Go to Map</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="order">Order</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="authorization">Authorization</string>
+    <string name="text">Please enter your phone number and name to register</string>
+    <string name="phone">phone</string>
+    <string name="name">name</string>
+    <string name="register">register</string>
+    <string name="confirmation">Confirm</string>
+    <string name="confirm">Enter the code from the SMS to confirm the telephone number</string>
+    <string name="code">code</string>
+    <string name="next">next</string>
+    <string name="go_to_map">Go to map</string>
+</resources>

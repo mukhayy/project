@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/White">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:background="@drawable/border1">
+
+        <TextView
+            android:textSize="17sp"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/confirmation" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:paddingTop="20dp"
+        android:background="@color/White">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/confirm"
+            android:gravity="center"
+            android:textColor="@color/grey"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:inputType="number"
+            android:hint="@string/code"
+            android:id="@+id/code"
+            android:background="@drawable/border"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp" />
+
+        <Button
+            android:layout_width="175dp"
+            android:layout_gravity="center"
+            android:layout_height="75dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/gas"
+            android:text="@string/next"
+            android:textColor="@color/White"
+            android:id="@+id/Next"/>
+
+    </LinearLayout>
+
+</LinearLayout>
