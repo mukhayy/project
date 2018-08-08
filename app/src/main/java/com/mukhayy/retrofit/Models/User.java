@@ -1,23 +1,27 @@
 package com.mukhayy.retrofit.Models;
 
 public class User {
-    private String Name;
+    private String firstName;
+    private String lastName;
     private String phone;
 
     public User() {
     }
 
-    public User(String name, String phone) {
-        Name = name;
-        this.phone = phone;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getName() {
-        return Name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPhone() {

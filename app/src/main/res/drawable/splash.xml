@@ -3,8 +3,9 @@
     android:opacity="opaque">
     <item android:drawable="@color/Main"/>
     <item>
+
         <bitmap
             android:gravity="center"
-            android:src="@drawable/drop"/>
+            android:src="@drawable/raindrop"/>
     </item>
 </layer-list>

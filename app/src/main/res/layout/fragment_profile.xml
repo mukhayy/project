@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/White"
+    android:id="@+id/fragment_container"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true" >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/White">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:background="@drawable/border">
+        android:background="@drawable/border"
+        >
 
         <TextView
             android:textSize="17sp"
@@ -29,7 +38,6 @@
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="20dp"
         android:background="@color/White">
 
         <TextView
@@ -39,33 +47,49 @@
             android:text="@string/text"
             android:gravity="center"
             android:textColor="@color/Black"
+
             />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:inputType="phone"
             android:hint="@string/phone"
+            android:textColorHint="@color/grey"
             android:id="@+id/phone"
             android:background="@drawable/border"
             android:padding="15dp"
-            android:layout_marginBottom="15dp" />
-
-
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/Black"
+            />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:inputType="textAutoComplete"
-            android:hint="@string/name"
-            android:id="@+id/Name"
+            android:hint="@string/first_name"
+            android:textColorHint="@color/grey"
+            android:id="@+id/firstName"
             android:background="@drawable/border"
-            android:padding="15dp" />
+            android:padding="15dp"
+            android:textColor="@color/Black"
+            android:layout_marginBottom="15dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:inputType="textAutoComplete"
+            android:hint="@string/last_name"
+            android:textColorHint="@color/grey"
+            android:id="@+id/lastName"
+            android:background="@drawable/border"
+            android:padding="15dp"
+            android:textColor="@color/Black"/>
 
         <Button
             android:layout_width="175dp"
             android:layout_gravity="center"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_marginTop="15dp"
             android:background="@color/Main"
             android:text="@string/register"
@@ -75,3 +99,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
+</ScrollView>

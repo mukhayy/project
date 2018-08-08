@@ -1,15 +1,19 @@
 package com.mukhayy.retrofit.Activities;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,29 +39,76 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TabLayout tabLayout;
-    private CustomViewPager viewPager;
-    private int[] tabIcons = {
-            R.drawable.home_grey,
-            R.drawable.search_grey,
-            R.drawable.fuel,
-            R.drawable.user_grey
-    };
+    /*
+        private TabLayout tabLayout;
+        private CustomViewPager viewPager;
+
+        private int[] tabIcons = {
+                R.drawable.home_grey,
+                R.drawable.search_grey,
+                R.drawable.fuel,
+                R.drawable.user_grey
+        };
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewPager = findViewById(R.id.viewPager);
+        /*viewPager = findViewById(R.id.viewPager);
         setUpViewPager(viewPager);
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         //tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         setTabIcons();
+*/
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setItemIconTintList(null);//original color
+
+        loadFragment(new HomeFragment());
+        }
+
+
+        private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment;
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    fragment = new HomeFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_search:
+                    fragment = new SearchFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_order:
+                    fragment = new OrderFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.navigation_profile:
+                    fragment = new ProfileFragment();
+                    loadFragment(fragment);
+                    return true;
+            }
+            return false;
+        }
+    };
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
+
+/*
     public void setTabIcons(){
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
@@ -104,4 +155,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    */
 }

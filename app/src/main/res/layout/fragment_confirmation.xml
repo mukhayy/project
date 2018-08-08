@@ -43,7 +43,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="70dp"
             android:inputType="number"
             android:hint="@string/code"
             android:id="@+id/code"
@@ -54,9 +54,9 @@
         <Button
             android:layout_width="175dp"
             android:layout_gravity="center"
-            android:layout_height="75dp"
+            android:layout_height="70dp"
             android:layout_marginTop="15dp"
-            android:background="@color/gas"
+            android:background="@color/Main"
             android:text="@string/next"
             android:textColor="@color/White"
             android:id="@+id/Next"/>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ import com.mukhayy.retrofit.R;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-public class ConfirmationFragment extends Fragment {
+public class ConfirmationFragment extends Fragment  {
 
     private Button next;
     private EditText code;
@@ -35,7 +36,6 @@ public class ConfirmationFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -43,9 +43,12 @@ public class ConfirmationFragment extends Fragment {
 
         code = view.findViewById(R.id.code);
         next = view.findViewById(R.id.Next);
-
         auth = FirebaseAuth.getInstance();
-        String phoneNumber = getActivity().getIntent().getStringExtra("phoneNumber").trim();
+        //String phoneNumber = ""; // = getActivity().getIntent().getStringExtra("phoneNumber").trim();
+        //sendVerificationCode();
+
+        Bundle b = getArguments();
+        String phoneNumber = b.getString("phone");
         sendVerificationCode(phoneNumber);
 
         next.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +61,11 @@ public class ConfirmationFragment extends Fragment {
                     return;
                 }
                 verifySignInCode(codee);
+                ProfileHomeFragment homeFragment = new ProfileHomeFragment();
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.frame_container, homeFragment);
+                ft.commit();
+
             }
         });
         return view;

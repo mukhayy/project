@@ -13,10 +13,17 @@
     <string name="text">Please enter your phone number and name to register</string>
     <string name="phone">phone</string>
     <string name="name">name</string>
-    <string name="register">register</string>
+    <string name="register">Be with us</string>
     <string name="confirmation">Confirm</string>
     <string name="confirm">Enter the code from the SMS to confirm the telephone number</string>
     <string name="code">code</string>
     <string name="next">next</string>
     <string name="go_to_map">Go to map</string>
+    <string name="info">Изменить информацию</string>
+    <string name="cards">Платежные карты</string>
+    <string name="addCard">Добавить платежную карту</string>
+    <string name="exit">Выйти</string>
+    <string name="support">Служба поддержки</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
 </resources>
