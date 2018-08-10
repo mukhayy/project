@@ -1,17 +1,12 @@
-package com.mukhayy.retrofit.Fragments;
+package com.mukhayy.retrofit.Activities;
 
-import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,36 +14,33 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mukhayy.retrofit.Models.User;
 import com.mukhayy.retrofit.R;
-import com.mukhayy.retrofit.database.DatabaseHelper;
 import com.mukhayy.retrofit.database.dbManager;
 
-public class ProfileFragment extends Fragment {
+public class ProfileActivivty extends AppCompatActivity {
 
     private EditText phone, firstName, lastName;
-
+    private TextView login;
     dbManager db;
     FirebaseAuth auth;
     DatabaseReference ref;
     User user;
 
-    public ProfileFragment() {// Required empty public constructor
-         }
-
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
 
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        phone = findViewById(R.id.phone);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        Button register = findViewById(R.id.register);
+        login = findViewById(R.id.login);
 
-        phone = view.findViewById(R.id.phone);
-        firstName = view.findViewById(R.id.firstName);
-        lastName = view.findViewById(R.id.lastName);
-        Button register = view.findViewById(R.id.register);
 
-        db = new dbManager(getContext());
+        db = new dbManager(ProfileActivivty.this);
         db.open();
 
-        FirebaseApp.initializeApp(getContext());
+        FirebaseApp.initializeApp(ProfileActivivty.this);
         ref = FirebaseDatabase.getInstance().getReference("User");
         auth = FirebaseAuth.getInstance();
         user = new User();
@@ -83,19 +75,21 @@ public class ProfileFragment extends Fragment {
                 getValues();
                 ref.push().setValue(user);
 
-                //ProfileHomeFragment homeFragment = new ProfileHomeFragment();
 
-                ConfirmationFragment confirmationFragment = new ConfirmationFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("phone", phoneNumber);
-                confirmationFragment.setArguments(bundle);
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.frame_container, confirmationFragment);
-                ft.commit();
+                Intent intent = new Intent(ProfileActivivty.this, ConfirmationActivity.class);
+                intent.putExtra("phoneNumber", phoneNumber);
+                startActivity(intent);
 
             }
         });
-        return view;
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivivty.this, ProfileLoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getValues(){
@@ -103,5 +97,4 @@ public class ProfileFragment extends Fragment {
         //user.setLastName(lastName.getText().toString().trim());
         user.setPhone(phone.getText().toString().trim());
     }
-
 }

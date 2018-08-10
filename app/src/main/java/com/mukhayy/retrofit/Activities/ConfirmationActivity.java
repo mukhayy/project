@@ -1,14 +1,10 @@
-package com.mukhayy.retrofit.Fragments;
+package com.mukhayy.retrofit.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,37 +14,30 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.mukhayy.retrofit.R;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-public class ConfirmationFragment extends Fragment  {
+public class ConfirmationActivity extends AppCompatActivity {
 
     private Button next;
     private EditText code;
     private String verificationId;
     FirebaseAuth auth;
 
-    public ConfirmationFragment() {
-        // Required empty public constructor
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_confirmation, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_confirmtion);
 
-        code = view.findViewById(R.id.code);
-        next = view.findViewById(R.id.Next);
+        code = findViewById(R.id.code);
+        next = findViewById(R.id.Next);
         auth = FirebaseAuth.getInstance();
-        //String phoneNumber = ""; // = getActivity().getIntent().getStringExtra("phoneNumber").trim();
-        //sendVerificationCode();
 
-        Bundle b = getArguments();
-        String phoneNumber = b.getString("phone");
+        String phoneNumber = getIntent().getStringExtra("phoneNumber").trim();
         sendVerificationCode(phoneNumber);
 
         next.setOnClickListener(new View.OnClickListener() {
@@ -61,45 +50,42 @@ public class ConfirmationFragment extends Fragment  {
                     return;
                 }
                 verifySignInCode(codee);
-                ProfileHomeFragment homeFragment = new ProfileHomeFragment();
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.frame_container, homeFragment);
-                ft.commit();
-
             }
         });
-        return view;
     }
 
-
-    private void verifySignInCode(String codeEntered){
+    protected void verifySignInCode(String codeEntered){
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, codeEntered);
         signInWithCredential(credential);
     }
 
-    private void signInWithCredential(PhoneAuthCredential credential){
+    protected void signInWithCredential(PhoneAuthCredential credential){
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent intent = new Intent(getContext(), ProfileHomeFragment.class);
+                            FirebaseUser user = task.getResult().getUser();
+                            Intent intent = new Intent(ConfirmationActivity.this, ProfileHomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                            intent.putExtra("user", user);
+
                             startActivity(intent);
 
                         }else {
-                            Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(ConfirmationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
 
-    private void sendVerificationCode(String phone){
+    protected void sendVerificationCode(String phone){
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phone,
                 60,
                 TimeUnit.SECONDS,
-                getActivity(),
+                this,
                 mCallbacks );
     }
 
@@ -121,15 +107,14 @@ public class ConfirmationFragment extends Fragment  {
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(ConfirmationActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
     };
 
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
-        //finish();
+        finish();
     }
-
 }

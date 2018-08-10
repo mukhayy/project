@@ -17,9 +17,5 @@
         android:title="@string/order"
         />
 
-    <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/user_grey"
-        android:title="@string/profile" />
 
 </menu>

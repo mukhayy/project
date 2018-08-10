@@ -1,41 +1,21 @@
 package com.mukhayy.retrofit.Activities;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import com.mukhayy.retrofit.Fragments.HomeFragment;
 import com.mukhayy.retrofit.Fragments.OrderFragment;
-import com.mukhayy.retrofit.Fragments.ProfileFragment;
 import com.mukhayy.retrofit.Fragments.SearchFragment;
-import com.mukhayy.retrofit.Models.Employee;
-import com.mukhayy.retrofit.Models.EmployeeList;
 import com.mukhayy.retrofit.R;
-import com.mukhayy.retrofit.adapter.EmployeeAdapter;
-import com.mukhayy.retrofit.network.GetEmployeeDataService;
-import com.mukhayy.retrofit.network.RetrofitInstance;
-import com.mukhayy.retrofit.utils.CustomViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.supercharge.shimmerlayout.ShimmerLayout;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,14 +36,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*viewPager = findViewById(R.id.viewPager);
+        /*
+        viewPager = findViewById(R.id.viewPager);
         setUpViewPager(viewPager);
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         //tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         setTabIcons();
-*/
+
+        */
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
+
+        View view = getSupportActionBar().getCustomView();
+        ImageButton userButton = view.findViewById(R.id.action_bar_user);
+        userButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivivty.class);
+                startActivity(intent);
+            }
+        });
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setItemIconTintList(null);//original color
@@ -89,10 +85,6 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_order:
                     fragment = new OrderFragment();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.navigation_profile:
-                    fragment = new ProfileFragment();
                     loadFragment(fragment);
                     return true;
             }
@@ -125,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-
     public class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -153,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
-
     }
     */
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RETROFIT</string>
+    <string name="app_name">fuel.me</string>
     <string name="title_activity_maps">Map</string>
     <string name="more">More</string>
     <string name="map">Go to Map</string>
@@ -26,4 +26,6 @@
     <string name="support">Служба поддержки</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="login">Login</string>
+    <string name="already">Already with us?</string>
 </resources>

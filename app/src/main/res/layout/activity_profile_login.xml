@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:background="@color/White">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/login"
+                android:gravity="center"
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:inputType="phone"
+                android:hint="@string/phone"
+                android:textColorHint="@color/grey"
+                android:id="@+id/phone"
+                android:background="@drawable/border"
+                android:padding="15dp"
+                android:layout_marginBottom="15dp"
+                android:textColor="@color/Black"
+                />
+
+            <Button
+                android:layout_width="175dp"
+                android:layout_gravity="center"
+                android:layout_height="60dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/Main"
+                android:text="@string/next"
+                android:id="@+id/login"
+                android:textColor="@color/White" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

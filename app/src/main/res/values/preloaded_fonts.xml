@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/aladin</item>
+        <item>@font/amita_bold</item>
+        <item>@font/bilbo_swash_caps</item>
+        <item>@font/chewy</item>
+        <item>@font/covered_by_your_grace</item>
+        <item>@font/pattaya</item>
+        <item>@font/sofia</item>
+        <item>@font/tulpen_one</item>
+        <item>@font/ubuntu_bold</item>
+        <item>@font/zeyada</item>
+    </array>
+</resources>

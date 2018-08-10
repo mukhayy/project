@@ -54,4 +54,23 @@ public class dbManager {
     public void delete(long _id) {
         database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper._ID + "=" + _id, null);
     }
+
+    public Cursor getDataFromDB(){
+       // database = dbHelper.getWritableDatabase();
+        Cursor cursor1 = database.rawQuery("Select * from " + DatabaseHelper.TABLE_NAME, null);
+        return cursor1;
+    }
+
+    public Boolean getUser(String phoneNumber){
+        Cursor cursor = database.rawQuery("SELECT phone FROM " + DatabaseHelper.TABLE_NAME
+                + " where " + DatabaseHelper.PHONE + " = " + phoneNumber, null);
+
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0){
+            return true;
+        }
+        cursor.close();
+        close();
+        return false;
+    }
 }
