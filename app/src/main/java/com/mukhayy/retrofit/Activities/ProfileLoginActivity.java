@@ -2,11 +2,14 @@ package com.mukhayy.retrofit.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,51 +27,78 @@ import java.util.concurrent.TimeUnit;
 
 public class ProfileLoginActivity extends AppCompatActivity {
 
-    EditText phoneNumber;
-    Button next;
+    private EditText phoneNumber;
+    TextView signUp;
+    Button next, next1;
     dbManager db;
     Session session;
     private FirebaseAuth auth;
-    ConfirmationActivity confirm;
     private String verificationId;
+    LinearLayout codeLayout;
+    String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_login);
 
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
+
         phoneNumber = findViewById(R.id.phone);
         next = findViewById(R.id.login);
-        auth = FirebaseAuth.getInstance();
+        next1 = findViewById(R.id.Next);
+        signUp = findViewById(R.id.signUp);
+        codeLayout = findViewById(R.id.codeLayout);
+
         session = new Session(this);
-        confirm = new ConfirmationActivity();
+
+        phone = phoneNumber.getText().toString();
+        auth = FirebaseAuth.getInstance();
+        sendVerificationCode(phone);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                codeLayout.setVisibility(View.VISIBLE);
                 db = new dbManager(ProfileLoginActivity.this);
                 db.open();
-                String phone = phoneNumber.getText().toString();
 
-                auth = FirebaseAuth.getInstance();
-                confirm.sendVerificationCode(phone);
+                next1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        phone = phoneNumber.getText().toString();
+                        auth = FirebaseAuth.getInstance();
+                        sendVerificationCode(phone);
 
+                        if(db.getUser(phone)){
+                            session.setLoggedin(true);
+                            Intent intent = new Intent(ProfileLoginActivity.this, ProfileHomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else
+                            Toast.makeText(ProfileLoginActivity.this, "Incorrect ", Toast.LENGTH_SHORT).show();
 
-                if(db.getUser(phone)){
-                    session.setLoggedin(true);
-                    Intent intent = new Intent(ProfileLoginActivity.this, ProfileHomeActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else
-                    Toast.makeText(ProfileLoginActivity.this, "Incorrect ", Toast.LENGTH_SHORT).show();
-            }
+                    }
+                });
+               }
         });
+
 
         if(session.loggedin()){
             Intent intent = new Intent(ProfileLoginActivity.this, ProfileHomeActivity.class);
             startActivity(intent);
             finish();
         }
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileLoginActivity.this, ProfileActivivty.class);
+                startActivity(intent);
+            }
+        });
     }
 
     protected void verifySignInCode(String codeEntered){

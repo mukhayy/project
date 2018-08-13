@@ -7,10 +7,9 @@
     android:layout_alignParentBottom="true"
     android:layout_alignParentStart="true" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_margin="20dp">
 
         <LinearLayout
@@ -38,7 +37,6 @@
                 android:hint="@string/phone"
                 android:textColorHint="@color/grey"
                 android:id="@+id/phone"
-                android:background="@drawable/border"
                 android:padding="15dp"
                 android:layout_marginBottom="15dp"
                 android:textColor="@color/Black"
@@ -54,8 +52,57 @@
                 android:id="@+id/login"
                 android:textColor="@color/White" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="@string/sign_up"
+                android:id="@+id/signUp"/>
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="20dp"
+            android:background="@color/White"
+            android:visibility="gone"
+            android:id="@+id/codeLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/confirm"
+                android:gravity="center"
+                android:textColor="@color/grey"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:inputType="number"
+                android:hint="@string/code"
+                android:id="@+id/code"
+                android:background="@drawable/border"
+                android:padding="15dp"
+                android:layout_marginBottom="15dp" />
+
+            <Button
+                android:layout_width="175dp"
+                android:layout_gravity="center"
+                android:layout_height="70dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/Main"
+                android:text="@string/next"
+                android:textColor="@color/White"
+                android:id="@+id/Next"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </ScrollView>
