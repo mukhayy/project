@@ -1,6 +1,8 @@
 package com.mukhayy.retrofit.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ConfirmationActivity extends AppCompatActivity {
 
-    private Button next;
+    private Button next_;
     private EditText code;
     private String verificationId;
     FirebaseAuth auth;
@@ -34,18 +36,14 @@ public class ConfirmationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmtion);
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
-
         code = findViewById(R.id.code);
-        next = findViewById(R.id.Next);
+        next_ = findViewById(R.id.Next);
         auth = FirebaseAuth.getInstance();
 
         String phoneNumber = getIntent().getStringExtra("phoneNumber").trim();
         sendVerificationCode(phoneNumber);
 
-        next.setOnClickListener(new View.OnClickListener() {
+        next_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String codee = code.getText().toString().trim();
@@ -114,7 +112,6 @@ public class ConfirmationActivity extends AppCompatActivity {
         public void onVerificationFailed(FirebaseException e) {
             Toast.makeText(ConfirmationActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
     };
 
     @Override

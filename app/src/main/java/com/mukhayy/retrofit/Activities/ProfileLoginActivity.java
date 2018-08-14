@@ -29,12 +29,9 @@ public class ProfileLoginActivity extends AppCompatActivity {
 
     private EditText phoneNumber;
     TextView signUp;
-    Button next, next1;
+    Button next;
     dbManager db;
     Session session;
-    private FirebaseAuth auth;
-    private String verificationId;
-    LinearLayout codeLayout;
     String phone;
 
     @Override
@@ -42,56 +39,38 @@ public class ProfileLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_login);
 
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
-
         phoneNumber = findViewById(R.id.phone);
         next = findViewById(R.id.login);
-        next1 = findViewById(R.id.Next);
         signUp = findViewById(R.id.signUp);
-        codeLayout = findViewById(R.id.codeLayout);
-
-        session = new Session(this);
-
+       // session = new Session(this);
         phone = phoneNumber.getText().toString();
-        auth = FirebaseAuth.getInstance();
-        sendVerificationCode(phone);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                codeLayout.setVisibility(View.VISIBLE);
+
                 db = new dbManager(ProfileLoginActivity.this);
                 db.open();
 
-                next1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        phone = phoneNumber.getText().toString();
-                        auth = FirebaseAuth.getInstance();
-                        sendVerificationCode(phone);
-
                         if(db.getUser(phone)){
-                            session.setLoggedin(true);
-                            Intent intent = new Intent(ProfileLoginActivity.this, ProfileHomeActivity.class);
+                          //  session.setLoggedin(true);
+                            Intent intent = new Intent(ProfileLoginActivity.this, ConfirmationActivity.class);
                             startActivity(intent);
                             finish();
                         }else
                             Toast.makeText(ProfileLoginActivity.this, "Incorrect ", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+
                }
         });
 
-
+/*
         if(session.loggedin()){
-            Intent intent = new Intent(ProfileLoginActivity.this, ProfileHomeActivity.class);
+            Intent intent = new Intent(ProfileLoginActivity.this, ConfirmationActivity.class);
             startActivity(intent);
             finish();
         }
-
+*/
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,61 +79,4 @@ public class ProfileLoginActivity extends AppCompatActivity {
             }
         });
     }
-
-    protected void verifySignInCode(String codeEntered){
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, codeEntered);
-        signInWithCredential(credential);
-    }
-
-    protected void signInWithCredential(PhoneAuthCredential credential){
-        auth.signInWithCredential(credential)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            FirebaseUser user = task.getResult().getUser();
-                            Intent intent = new Intent(ProfileLoginActivity.this, ProfileHomeActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                            intent.putExtra("user", user);
-
-                            startActivity(intent);
-
-                        }else {
-                            Toast.makeText(ProfileLoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-    }
-
-    protected void sendVerificationCode(String phone){
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phone,
-                60,
-                TimeUnit.SECONDS,
-                this,
-                mCallbacks );
-    }
-
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        @Override
-        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-            verificationId = s;
-        }
-
-        @Override
-        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-            String codereceived = phoneAuthCredential.getSmsCode();
-            if (codereceived != null) {
-                phoneNumber.setText(codereceived);
-                verifySignInCode(codereceived);
-            }
-        }
-
-        @Override
-        public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(ProfileLoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    };
 }

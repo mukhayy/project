@@ -61,47 +61,6 @@
                 android:id="@+id/signUp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:paddingTop="20dp"
-            android:background="@color/White"
-            android:visibility="gone"
-            android:id="@+id/codeLayout">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/confirm"
-                android:gravity="center"
-                android:textColor="@color/grey"
-                />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:inputType="number"
-                android:hint="@string/code"
-                android:id="@+id/code"
-                android:background="@drawable/border"
-                android:padding="15dp"
-                android:layout_marginBottom="15dp" />
-
-            <Button
-                android:layout_width="175dp"
-                android:layout_gravity="center"
-                android:layout_height="70dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/Main"
-                android:text="@string/next"
-                android:textColor="@color/White"
-                android:id="@+id/Next"/>
-
-        </LinearLayout>
 
     </RelativeLayout>
 
