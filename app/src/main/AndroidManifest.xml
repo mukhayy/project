@@ -54,8 +54,5 @@
             android:name=".Activities.ProfileHomeActivity">
 
         </activity>
-        <activity android:name=".Activities.ProfileLoginActivity">
-
-        </activity>
     </application>
 </manifest>

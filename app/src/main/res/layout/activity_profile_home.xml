@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="@color/White"
+            android:id="@+id/phone"
             />
     </LinearLayout>
 
@@ -194,5 +195,13 @@
                 android:textColor="@color/Main"
                 android:text="+99871 000 00 00"/>
         </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_container">
+
+        </FrameLayout>
+
     </LinearLayout>
 </LinearLayout>

@@ -30,4 +30,8 @@
     <string name="already">Already with us?</string>
     <string name="sign_up">Sign Up</string>
     <string name="action_profile">action_profile</string>
+    <string name="info_">Изменить данные</string>
+    <string name="update">Обновить</string>
+    <string name="surname">Фамилия</string>
+    <string name="nameRu">Имя</string>
 </resources>

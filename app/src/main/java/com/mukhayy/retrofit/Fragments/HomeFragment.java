@@ -26,7 +26,6 @@ import com.mukhayy.retrofit.network.RetrofitInstance;
 import java.util.ArrayList;
 
 import io.supercharge.shimmerlayout.ShimmerLayout;
-import jp.wasabeef.blurry.Blurry;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,12 +73,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<EmployeeList> call, Response<EmployeeList> response) {
                 shimmerLayout.setVisibility(View.GONE);
                 generateEmployeeList(response.body().getEmployeeArrayList(), view);
-              /*  Blurry.with(getActivity())
-                        .radius(10)
-                        .sampling(8)
-                        .async()
-                        .capture(imageView)
-                        .into(imageView);*/
+
             }
 
             @Override

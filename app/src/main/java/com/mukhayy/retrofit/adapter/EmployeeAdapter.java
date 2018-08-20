@@ -23,7 +23,6 @@ import com.mukhayy.retrofit.R;
 
 import java.util.ArrayList;
 
-import jp.wasabeef.blurry.Blurry;
 
 public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>  {
 
@@ -53,29 +52,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                //LayoutInflater inflater = LayoutInflater.from(context);
-                //view = inflater.inflate(R.layout.dialog, (ViewGroup) view.findViewById(R.id.layout));
-               // view = inflater.inflate(R.layout.dialog, (ViewGroup) view.findViewById(R.id.MainLayout));
-                builder.setNeutralButton(
-                        R.string.go_to_map, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                            }
-                        }
-                );
-
-                //builder.setView(view);
-                AlertDialog dialog = builder.create();
-                Blurry.with(context)
-                        .radius(40)
-                        .sampling(100)
-                        .async()
-                        .capture(view)
-                        .into((ImageView) view);
-
-                dialog.show();
+               //
             }
         });
 
@@ -90,7 +67,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
     public class EmployeeViewHolder extends RecyclerView.ViewHolder /*implements View.OnClickListener*/ {
 
         TextView name, email, phone;
-       // ImageView image;
         CardView parentLayout;
         ImageView imageView;
 
@@ -99,7 +75,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
             name = itemView.findViewById(R.id.employee_name);
             email = itemView.findViewById(R.id.email);
             phone = itemView.findViewById(R.id.phone);
-           // image = itemView.findViewById(R.id.image);
             parentLayout = itemView.findViewById(R.id.parentLayout);
             imageView = itemView.findViewById(R.id.image);
         }

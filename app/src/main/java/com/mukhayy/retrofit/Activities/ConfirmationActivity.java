@@ -1,9 +1,12 @@
 package com.mukhayy.retrofit.Activities;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.util.SharedPreferencesUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -21,6 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.mukhayy.retrofit.R;
+import com.mukhayy.retrofit.utils.Session;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,18 +35,27 @@ public class ConfirmationActivity extends AppCompatActivity {
     private EditText code;
     private String verificationId;
     FirebaseAuth auth;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmtion);
 
+        session = new Session(ConfirmationActivity.this);
+
+        if(session.loggedin()){
+            Intent intent = new Intent(ConfirmationActivity.this, ProfileHomeActivity.class);
+            startActivity(intent);
+        }
+
         code = findViewById(R.id.code);
-        next_ = findViewById(R.id.Next);
+        next_ = findViewById(R.id.next_);
         auth = FirebaseAuth.getInstance();
 
         String phoneNumber = getIntent().getStringExtra("phoneNumber").trim();
         sendVerificationCode(phoneNumber);
+        session.setLoggedin(true);
 
         next_.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,16 +79,17 @@ public class ConfirmationActivity extends AppCompatActivity {
     protected void signInWithCredential(PhoneAuthCredential credential){
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            FirebaseUser user = task.getResult().getUser();
+                            //FirebaseUser user = task.getResult().getUser();
+                            String phoneNumber = getIntent().getStringExtra("phoneNumber").trim();
+
                             Intent intent = new Intent(ConfirmationActivity.this, ProfileHomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                            intent.putExtra("user", user);
-
-                            startActivity(intent);
+                            intent.putExtra("phoneNumber", phoneNumber);
+                            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(ConfirmationActivity.this).toBundle());
 
                         }else {
                             Toast.makeText(ConfirmationActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();

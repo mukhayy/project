@@ -1,21 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Activities.MainActivity"
-    android:background="@color/White"
-    android:id="@+id/container">
+    android:id="@+id/container"
+    android:orientation="vertical"
+    android:background="@color/colorCard">
+    <!--
+        <com.mukhayy.retrofit.utils.CustomViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        -->
 
-<!--
-    <com.mukhayy.retrofit.utils.CustomViewPager
-        android:id="@+id/viewPager"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-    -->
+        android:layout_height="wrap_content"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                app:cardElevation="7dp"
+                app:cardCornerRadius="7dp"
+                app:cardBackgroundColor="@color/White">
+
+                <SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp">
+
+                </SearchView>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.design.widget.BottomNavigationView
+                android:id="@+id/navigation"
+                android:layout_marginBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:itemTextColor="@color/grey"
+                app:menu="@menu/navigation" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
 
     <FrameLayout
         android:id="@+id/frame_container"
@@ -24,25 +67,5 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </FrameLayout>
-<!--
-<android.support.design.widget.TabLayout
-    android:id="@+id/tabs"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    app:tabGravity="fill"
-    android:layout_alignParentBottom="true"
-    android:background="@color/White"
-    />
--->
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:itemBackground="@color/White"
-        android:foreground="?attr/selectableItemBackground"
-        app:itemIconTint="@color/grey"
-        app:itemTextColor="@color/grey"
-        app:menu="@menu/navigation"/>
-</android.support.design.widget.CoordinatorLayout>
+
+</LinearLayout>

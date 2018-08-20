@@ -25,13 +25,12 @@ public class dbManager {
         dbHelper.close();
     }
 
-    public void insert(String firstName, String lastName, String phone) {
+    public void insert(String phone) {
         ContentValues contentValue = new ContentValues();
-        contentValue.put(DatabaseHelper.FIRTSNAME, firstName);
-        contentValue.put(DatabaseHelper.LASTNAME, lastName);
         contentValue.put(DatabaseHelper.PHONE, phone);
         database.insert(DatabaseHelper.TABLE_NAME, null, contentValue);
     }
+
 
     public Cursor fetch() {
         String[] columns = new String[] { DatabaseHelper._ID, DatabaseHelper.FIRTSNAME, DatabaseHelper.LASTNAME, DatabaseHelper.PHONE};
@@ -42,12 +41,12 @@ public class dbManager {
         return cursor;
     }
 
-    public int update(long _id, String firstName, String lastName, String phone) {
+    public int update(String firstName, String lastName, String phone) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.FIRTSNAME, firstName);
         contentValues.put(DatabaseHelper.LASTNAME, lastName);
-        contentValues.put(DatabaseHelper.PHONE, phone);
-        int i = database.update(DatabaseHelper.TABLE_NAME, contentValues, DatabaseHelper._ID + " = " + _id, null);
+        //contentValues.put(DatabaseHelper.PHONE, phone);
+        int i = database.update(DatabaseHelper.TABLE_NAME, contentValues, DatabaseHelper.PHONE + " = " + phone, null);
         return i;
     }
 
@@ -55,9 +54,10 @@ public class dbManager {
         database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper._ID + "=" + _id, null);
     }
 
-    public Cursor getDataFromDB(){
+    public Cursor getDataFromDB(String phoneNumber){
        // database = dbHelper.getWritableDatabase();
-        Cursor cursor1 = database.rawQuery("Select * from " + DatabaseHelper.TABLE_NAME, null);
+        Cursor cursor1 = database.rawQuery("Select * from " + DatabaseHelper.TABLE_NAME
+                + " where " + DatabaseHelper.PHONE + " = " + phoneNumber, null);
         return cursor1;
     }
 
@@ -73,4 +73,14 @@ public class dbManager {
         close();
         return false;
     }
+
+
+
+////////////////////////////////////////////////////
+   /* public Cursor getPhone(){
+        Cursor cursor2 = database.rawQuery("Select phone from " + DatabaseHelper.TABLE_NAME, null);
+        return cursor2;
+    }
+*/
+
 }

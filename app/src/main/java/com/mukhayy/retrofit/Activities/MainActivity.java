@@ -5,18 +5,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 
 import com.mukhayy.retrofit.Fragments.HomeFragment;
 import com.mukhayy.retrofit.Fragments.OrderFragment;
-import com.mukhayy.retrofit.Fragments.SearchFragment;
 import com.mukhayy.retrofit.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
         };
     */
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         /*
         viewPager = findViewById(R.id.viewPager);
         setUpViewPager(viewPager);
@@ -49,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         */
 
-        View view = getSupportActionBar().getCustomView();
+        //View view = getSupportActionBar().getCustomView();
        /* ImageButton userButton = view.findViewById(R.id.action_bar_user);
         userButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +73,6 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     fragment = new HomeFragment();
-                    loadFragment(fragment);
-                    return true;
-                case R.id.navigation_search:
-                    fragment = new SearchFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_order:
@@ -165,4 +157,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     */
+
 }

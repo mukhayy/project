@@ -10,8 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +18,8 @@
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:background="@color/White">
+            android:background="@color/White"
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="@string/text"
                 android:gravity="center"
-                android:textColor="@color/Black"
+                android:textColor="@color/grey"
 
                 />
 
@@ -38,12 +38,11 @@
                 android:hint="@string/phone"
                 android:textColorHint="@color/grey"
                 android:id="@+id/phone"
-                android:background="@drawable/border"
                 android:padding="15dp"
                 android:layout_marginBottom="15dp"
                 android:textColor="@color/Black"
                 />
-
+<!--
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -66,17 +65,17 @@
                 android:background="@drawable/border"
                 android:padding="15dp"
                 android:textColor="@color/Black"/>
-
+-->
             <Button
                 android:layout_width="175dp"
                 android:layout_gravity="center"
                 android:layout_height="60dp"
                 android:layout_marginTop="15dp"
-                android:background="@color/Main"
+                android:background="@drawable/button_background"
                 android:text="@string/register"
                 android:id="@+id/register"
                 android:textColor="@color/White" />
-
+<!--
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,6 +83,9 @@
                 android:layout_marginTop="15dp"
                 android:text="@string/already"
                 android:id="@+id/login"/>
+                -->
+
+
         </LinearLayout>
 
     </LinearLayout>

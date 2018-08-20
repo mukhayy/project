@@ -31,7 +31,6 @@
             android:inputType="number"
             android:hint="@string/code"
             android:id="@+id/code"
-            android:background="@drawable/border"
             android:padding="15dp"
             android:layout_marginBottom="15dp" />
 
@@ -40,10 +39,10 @@
             android:layout_gravity="center"
             android:layout_height="70dp"
             android:layout_marginTop="15dp"
-            android:background="@color/Main"
+            android:background="@drawable/button_background"
             android:text="@string/next"
             android:textColor="@color/White"
-            android:id="@+id/Next"/>
+            android:id="@+id/next_"/>
 
     </LinearLayout>
 
